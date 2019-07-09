@@ -5,11 +5,15 @@ import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+// 导入 router
+import router from '@/router'
+
 // 在全局注册 ElementUI 组件
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
 new Vue({
+  router,
   render: h => h(App)
 }).$mount('#app')
