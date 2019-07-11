@@ -4,12 +4,12 @@
         <!--  图片logo -->
       <img src="../../assets/images/logo_index.png" alt="">
       <!-- from表单 -->
-      <el-form>
-          <el-form-item>
-              <el-input placeholder="请输入手机号"></el-input>
+      <el-form :rules="loginRules" :model="loginForm">
+          <el-form-item prop="mobile">
+              <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
           </el-form-item>
-        <el-form-item>
-            <el-input placeholder="请输入验证码" style="width:65%"></el-input>
+        <el-form-item prop="code">
+            <el-input placeholder="请输入验证码"  v-model="loginForm.code" style="width:65%"></el-input>
             <el-button type="primary" plain style="float:right">发送验证码</el-button>
         </el-form-item>
         <el-form-item>
@@ -30,7 +30,30 @@
 <script>
 export default {
   data () {
+    // 自定义规则，校验手机号码格式是否正确
+    // 先定义好函数，再在methods中或者 loginRules 中使用
+    const checkMobile = (rule, value, callback) => {
+      if (/^1[3-9]\d{9}/.test(value)) {
+        callback()
+      } else {
+        callback(new Error('手机号格式不正确'))
+      }
+    }
     return {
+      loginForm: {
+        mobile: '',
+        code: ''
+      },
+      loginRules: {
+        mobile: [
+          { required: true, message: '请输入手机号', trigger: 'blur' },
+          { validator: checkMobile, trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' },
+          { len: 6, message: '验证码为6位数字', trigger: 'blur' }
+        ]
+      },
       checked: true
     }
   },
