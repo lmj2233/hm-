@@ -5,7 +5,7 @@ import Vue from 'vue'
 // 导入 Login 组件
 import Login from '@/views/login'
 import home from '@/views/home'
-
+import welcome from '@/views/welcome'
 // 注册 VueRouter
 Vue.use(VueRouter)
 
@@ -14,7 +14,13 @@ const router = new VueRouter({
   routes: [
     // 配置 login 路由
     { path: '/login', name: 'login', component: Login },
-    { path: '/', name: 'home', component: home }
+    { path: '/',
+      // name: 'home',
+      component: home,
+      children: [
+        { path: '/', name: 'welcome', component: welcome }
+      ]
+    }
   ]
 })
 

@@ -59,7 +59,8 @@
                 </el-dropdown-menu>
             </el-dropdown>
         </el-header>
-        <el-main>Main</el-main>
+        <!-- 内容区域 -->
+        <router-view></router-view>
   </el-container>
 </el-container>
 </template>
@@ -88,19 +89,20 @@ export default {
     position:absolute;
     left:0;
     top:0;
+    .my-aside{
+        background: #002033;
+    }
     .logo{
         // 设置背景图片要设置宽高
         width:100%;
         height: 60px;
-        background: url(../../assets/images/logo_admin.png) no-repeat center / 140px auto;
+        background: #002840 url(../../assets/images/logo_admin.png) no-repeat center / 140px auto;
     }
     .close{
         background-image: url(../../assets/images/logo_admin_01.png);
         background-size:30px auto;
     }
-    .my-aside{
-        background: #002840;
-    }
+
     .home-header{
         height:60px;
         line-height: 60px;
