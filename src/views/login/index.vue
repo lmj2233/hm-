@@ -4,7 +4,7 @@
         <!--  图片logo -->
       <img src="../../assets/images/logo_index.png" alt="">
       <!-- from表单 -->
-      <el-form :rules="loginRules" :model="loginForm"  ref="loginForm">
+      <el-form :rules="loginRules" status-icon :model="loginForm"  ref="loginForm">
           <el-form-item prop="mobile">
               <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
           </el-form-item>
@@ -41,8 +41,8 @@ export default {
     }
     return {
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '18438626320',
+        code: '246810'
       },
       // 单个表单元素校验规则
       loginRules: {
@@ -70,7 +70,7 @@ export default {
             })
             .catch(() => {
               // 弹出提示 $message
-              this.$message.error('用户名或密码错误')
+              this.$message.error('用户名或验证码错误')
             })
         }
       })
