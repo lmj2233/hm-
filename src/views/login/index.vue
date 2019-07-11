@@ -4,7 +4,7 @@
         <!--  图片logo -->
       <img src="../../assets/images/logo_index.png" alt="">
       <!-- from表单 -->
-      <el-form :rules="loginRules" :model="loginForm">
+      <el-form :rules="loginRules" :model="loginForm"  ref="loginForm">
           <el-form-item prop="mobile">
               <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
           </el-form-item>
@@ -20,7 +20,7 @@
              <el-link type="primary" :underline="false">隐私条款</el-link>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" @click="onSubmit" style="width:100%">登 录</el-button>
+            <el-button type="primary" @click="login" style="width:100%">登 录</el-button>
         </el-form-item>
         </el-form>
     </el-card>
@@ -44,10 +44,11 @@ export default {
         mobile: '',
         code: ''
       },
+      // 单个表单元素校验规则
       loginRules: {
         mobile: [
           { required: true, message: '请输入手机号', trigger: 'blur' },
-          { validator: checkMobile, trigger: 'blur' }
+          { validator: checkMobile, trigger: 'change' } // change内容改变的时候
         ],
         code: [
           { required: true, message: '请输入验证码', trigger: 'blur' },
@@ -58,8 +59,21 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
-
+    login () {
+      // 整体表单验证 $refs validate
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+            .then((res) => {
+              // 登录成功，跳转到首页
+              this.$router.push('/')
+            })
+            .catch(() => {
+              // 弹出提示 $message
+              this.$message.error('用户名或密码错误')
+            })
+        }
+      })
     }
   }
 }
