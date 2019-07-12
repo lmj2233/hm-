@@ -27,5 +27,25 @@ const router = new VueRouter({
   ]
 })
 
+// 注册一个全局前置守卫，解决拦截路由，没有登录过就不让登录跳回 login页面
+router.beforeEach((to, from, next) => {
+  // 如果是登录页就直接放行,后面就不用执行了 return next()
+  // if (to.path === '/login') return next()
+  // // 如果有 token 就放行，没有就跳回 登录页login
+  // // 获取登录成功保存的 token
+  // const user = window.sessionStorage.getItem('hm73-tt')
+  // if (user) {
+  //   next()
+  // } else {
+  //   next('/login')
+  // }
+
+  // 简化写法 地址为/login和有token就next() ;否则就跳转到登录页
+  // 如果不去登录页也没有token的就跳到login页面
+  const user = window.sessionStorage.getItem('hm73-tt')
+  if (to.path !== '/login' && !user) return next('/login')
+  next()
+})
+
 // 导出 router ，放到 main.js中导入使用
 export default router
