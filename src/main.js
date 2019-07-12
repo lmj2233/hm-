@@ -7,7 +7,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 导入 router
 import router from '@/router'
 // 导入 axios
-import axios from 'axios'
+// import axios from 'axios'
+// 配置axios的基准路径和headers
+// axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
+// axios.defaults.headers = { Authorization: 'Beaer' + JSON.parse(window.sessionStorage.getItem('hm73-tt')).token }
+// 详细的axios的路径
+import axios from '@/api/axios.js'
 Vue.prototype.$http = axios
 
 // 在全局注册 ElementUI 组件
