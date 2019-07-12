@@ -4,39 +4,40 @@
         <div class="logo" :class="{close:isCollapse}"></div>
         <!-- 导航菜单 -->
          <el-menu
-            default-active="1"
+            default-active="/"
             background-color="#002033"
             text-color="#fff"
             active-text-color="#ffd04b"
             style="border-right:none"
             :collapse="isCollapse"
             :collapse-transition="false"
+            router
             >
-        <el-menu-item index="1">
+        <el-menu-item index="/">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="/article">
             <i class="el-icon-document"></i>
             <span slot="title">内容管理</span>
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="/picture">
             <i class="el-icon-picture"></i>
             <span slot="title">素材管理</span>
         </el-menu-item>
-        <el-menu-item index="4">
-            <i class="el-icon-document"></i>
+        <el-menu-item index="/publish">
+            <i class="el-icon-s-promotion"></i>
             <span slot="title">发布文章</span>
         </el-menu-item>
-        <el-menu-item index="5">
+        <el-menu-item index="/commit">
             <i class="el-icon-chat-dot-square"></i>
             <span slot="title">评论管理</span>
         </el-menu-item>
-        <el-menu-item index="6">
+        <el-menu-item index="/fans">
             <i class="el-icon-present"></i>
             <span slot="title">粉丝管理</span>
         </el-menu-item>
-        <el-menu-item index="7">
+        <el-menu-item index="/setting">
             <i class="el-icon-setting"></i>
             <span slot="title">个人设置</span>
         </el-menu-item>
@@ -59,8 +60,10 @@
                 </el-dropdown-menu>
             </el-dropdown>
         </el-header>
-        <!-- 内容区域 -->
-        <router-view></router-view>
+        <!-- <el-main> -->
+            <!-- 二级路由渲染的内容区域 -->
+            <router-view></router-view>
+        <!-- </el-main> -->
   </el-container>
 </el-container>
 </template>
