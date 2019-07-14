@@ -13,6 +13,8 @@
 
 <script>
 export default {
+  // 定义一个name，相当于插槽的标签名
+  name: 'my-bread'
 }
 </script>
 

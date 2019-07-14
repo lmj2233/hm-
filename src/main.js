@@ -13,7 +13,12 @@ import router from '@/router'
 // axios.defaults.headers = { Authorization: 'Beaer' + JSON.parse(window.sessionStorage.getItem('hm73-tt')).token }
 // 详细的axios的路径
 import axios from '@/api/axios.js'
+// 导入components
+import components from '@/components'
+
 Vue.prototype.$http = axios
+// 注册插件
+Vue.use(components)
 
 // 在全局注册 ElementUI 组件
 Vue.use(ElementUI)
