@@ -3,13 +3,11 @@
         <!-- 筛选容器 -->
         <el-card class="header-card">
             <div slot="header" class="clearfix" >
-                <el-breadcrumb separator-class="el-icon-arrow-right">
-                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>内容管理</el-breadcrumb-item>
-                </el-breadcrumb>
+                <!-- 面包屑导航 -->
+                <my-bread>内容管理</my-bread>
             </div>
             <!-- 筛选容器内容 -->
-            <el-form  :model="reqParams" label-width="80px">
+            <el-form  :model="reqParams" size="small" label-width="80px">
                 <el-form-item label="状态：">
                     <el-radio-group v-model="reqParams.status">
                         <el-radio :label="null">全部</el-radio>
@@ -47,21 +45,24 @@
         </el-card>
         <!-- 结果容器 -->
         <el-card  class="body-card">
-            <my-test>
+            <!-- <my-test>
                 <template slot="con" slot-scope="scope"> 1{{scope.test }}</template>
                 <template  v-slot:fot="scope">2{{ scope.test2}}</template>
-            </my-test>
+            </my-test> -->
         </el-card>
     </div>
 </template>
 
 <script>
 // 导入test.vue 插槽
-import MyTest from '@/components/test.vue'
+// import MyTest from '@/components/test.vue'
+// 导入面包屑插槽 my-bread
+import MyBread from '@/components/my-bread.vue'
 
 export default {
   components: {
-    MyTest
+    // MyTest
+    MyBread
   },
   data () {
     return {

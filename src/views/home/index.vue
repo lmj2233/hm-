@@ -14,7 +14,7 @@
             router
             >
         <el-menu-item index="/">
-            <i class="el-icon-menu"></i>
+            <i class="el-icon-house"></i>
             <span slot="title">首页</span>
         </el-menu-item>
         <el-menu-item index="/article">
