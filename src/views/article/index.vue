@@ -48,8 +48,8 @@
         <!-- 结果容器 -->
         <el-card  class="body-card">
             <my-test>
-                <template slot="con"> 1</template>
-                <template></template>
+                <template slot="con" slot-scope="scope"> 1{{scope.test }}</template>
+                <template  v-slot:fot="scope">2{{ scope.test2}}</template>
             </my-test>
         </el-card>
     </div>
