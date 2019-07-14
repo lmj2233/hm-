@@ -57,13 +57,13 @@
 // 导入test.vue 插槽
 // import MyTest from '@/components/test.vue'
 // 导入面包屑插槽 my-bread
-import MyBread from '@/components/my-bread.vue'
+// import MyBread from '@/components/my-bread.vue'
 
 export default {
-  components: {
-    // MyTest
-    MyBread
-  },
+//   components: {
+//     // MyTest
+//     MyBread
+//   },
   data () {
     return {
       // 提交给后台的数据，null和''的区别，null是不会发送该字段的
@@ -86,7 +86,6 @@ export default {
 
 <style lang="less" scoped>
 .article-container{
-    padding:20px;
     .header-card{
         margin-bottom: 20px;
     }

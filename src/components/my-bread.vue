@@ -14,6 +14,7 @@
 <script>
 export default {
   // 定义一个name，相当于插槽的标签名
+  //   要将原来的局部插槽删除
   name: 'my-bread'
 }
 </script>

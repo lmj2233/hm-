@@ -60,10 +60,10 @@
                 </el-dropdown-menu>
             </el-dropdown>
         </el-header>
-        <!-- <el-main> -->
+        <el-main>
             <!-- 二级路由渲染的内容区域 -->
             <router-view></router-view>
-        <!-- </el-main> -->
+        </el-main>
   </el-container>
 </el-container>
 </template>
