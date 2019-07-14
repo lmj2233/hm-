@@ -8,9 +8,9 @@
 <script>
 export default {
   // 进行测试 请求拦截器和响应拦截器
-  created () {
-    this.$http.get('articles').then(res => console.log(res.data))
-  }
+  // created () {
+  //   this.$http.get('articles').then(res => console.log(res.data))
+  // }
 }
 </script>
 

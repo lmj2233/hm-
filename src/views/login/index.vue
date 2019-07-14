@@ -61,20 +61,34 @@ export default {
   methods: {
     login () {
       // 整体表单验证 $refs validate
-      this.$refs.loginForm.validate((valid) => {
+      // this.$refs.loginForm.validate((valid) => {
+      //   if (valid) {
+      //     this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+      //       .then((res) => {
+      //         // console.log(res.data)
+      //         // 存储sessionStorage
+      //         window.sessionStorage.setItem('hm73-tt', JSON.stringify(res.data.data))
+      //         // 登录成功，跳转到首页
+      //         this.$router.push('/')
+      //       })
+      //       .catch(() => {
+      //         // 弹出提示 $message
+      //         this.$message.error('用户名或验证码错误')
+      //       })
+      //   }
+      // })
+
+      // await 与 async结合使用
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
-          this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
-            .then((res) => {
-              // console.log(res.data)
-              // 存储sessionStorage
-              window.sessionStorage.setItem('hm73-tt', JSON.stringify(res.data.data))
-              // 登录成功，跳转到首页
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 弹出提示 $message
-              this.$message.error('用户名或验证码错误')
-            })
+          // try{ 业务逻辑，要处理的内容 }  catch{ 业务逻辑错误的时候调用catch，进行错误处理 }
+          try {
+            const res = await this.$http.post('authorizations', this.loginForm)
+            window.sessionStorage.setItem('hm73-tt', JSON.stringify(res.data.data))
+            this.$router.push('/')
+          } catch (err) {
+            this.$message.error('用户名或密码错误')
+          }
         }
       })
     }

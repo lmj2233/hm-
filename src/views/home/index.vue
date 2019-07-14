@@ -50,13 +50,13 @@
             <!-- 下拉菜单 -->
             <el-dropdown style="float:right">
                 <span class="el-dropdown-link">
-                    <img src="../../assets/images/avatar.jpg" alt="" width="30px">
-                    <b>黑马小哥</b>
+                    <img :src="avatar" alt="" width="30px">
+                    <b>{{name}}</b>
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-                    <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+                    <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item>
+                    <el-dropdown-item icon="el-icon-unlock" @click.native="logout()">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </el-header>
@@ -73,12 +73,32 @@ export default {
   data () {
     return {
       // false ：展开 true：收起
-      isCollapse: false
+      isCollapse: false,
+      //   记录用户的name和img
+      name: '',
+      avatar: ''
     }
+  },
+  // 当组件创建好的时候，获取用户信息
+  created () {
+    const user = JSON.parse(window.sessionStorage.getItem('hm73-tt'))
+    // console.log(user)
+    this.name = user.name
+    this.avatar = user.photo
   },
   methods: {
     toggleMenu () {
       this.isCollapse = !this.isCollapse
+    },
+    // 跳转到个人设置
+    setting () {
+      this.$router.push('/setting')
+    },
+    // 退出登录
+    logout () {
+      // 清空sessionStorage
+      window.sessionStorage.removeItem('hm73-tt')
+      this.$router.push('/login')
     }
   }
 }
