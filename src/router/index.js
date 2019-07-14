@@ -7,6 +7,7 @@ import Login from '@/views/login'
 import home from '@/views/home'
 import welcome from '@/views/welcome'
 import NotFound from '@/views/404'
+import article from '@/views/article'
 
 // 注册 VueRouter
 Vue.use(VueRouter)
@@ -20,7 +21,8 @@ const router = new VueRouter({
       // name: 'home',
       component: home,
       children: [
-        { path: '/', name: 'welcome', component: welcome }
+        { path: '/', name: 'welcome', component: welcome },
+        { path: '/article', name: 'article', component: article }
       ]
     },
     { path: '*', name: '404', component: NotFound }
