@@ -12,13 +12,12 @@ import router from '@/router'
 // axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
 // axios.defaults.headers = { Authorization: 'Beaer' + JSON.parse(window.sessionStorage.getItem('hm73-tt')).token }
 // 详细的axios的路径
-import axios from '@/api/axios.js'
+import axios from '@/api/axios'
 // 导入components
 import components from '@/components'
-
-Vue.prototype.$http = axios
 // 注册插件
 Vue.use(components)
+Vue.prototype.$http = axios
 
 // 在全局注册 ElementUI 组件
 Vue.use(ElementUI)
