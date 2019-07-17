@@ -15,6 +15,10 @@ import router from '@/router'
 import axios from '@/api/axios'
 // 导入components
 import components from '@/components'
+
+// 引入全局样式
+import '@/styles/index.less'
+
 // 注册插件
 Vue.use(components)
 Vue.prototype.$http = axios

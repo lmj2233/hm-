@@ -8,7 +8,7 @@ import home from '@/views/home'
 import welcome from '@/views/welcome'
 import NotFound from '@/views/404'
 import article from '@/views/article'
-
+import image from '@/views/image'
 // 注册 VueRouter
 Vue.use(VueRouter)
 
@@ -22,7 +22,8 @@ const router = new VueRouter({
       component: home,
       children: [
         { path: '/', name: 'welcome', component: welcome },
-        { path: '/article', name: 'article', component: article }
+        { path: '/article', name: 'article', component: article },
+        { path: '/image', name: 'image', component: image }
       ]
     },
     { path: '*', name: '404', component: NotFound }
