@@ -25,6 +25,8 @@
                     <div class="block">
                         <el-date-picker
                         v-model="dateValues"
+                        @change="changeDate"
+                        value-format="yyyy-MM-dd"
                         type="daterange"
                         range-separator="至"
                         start-placeholder="开始日期"

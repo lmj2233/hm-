@@ -25,6 +25,8 @@
                         <el-date-picker
                         v-model="dateValues"
                         type="daterange"
+                        value-format="yyyy-MM-dd"
+                        @change="changeDate"
                         range-separator="至"
                         start-placeholder="开始日期"
                         end-placeholder="结束日期">
@@ -32,7 +34,7 @@
                     </div>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">筛选</el-button>
+                    <el-button type="primary" @click="check()">筛选</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -40,7 +42,7 @@
         <el-card  class="body-card">
             <div slot="header" class="clearfix" >
                 根据筛选条件共查询到
-                <b>0</b> 条结果：
+                <b>{{total}}</b> 条结果：
             </div>
             <!-- 表格 -->
              <el-table :data="articles" style="width: 100%">
@@ -60,12 +62,25 @@
                         <el-tag v-if="scope.row.status===4" type="danger">已删除</el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column  label="发布时间"></el-table-column>
-                <el-table-column  label="操作" ></el-table-column>
+                <el-table-column  label="发布时间" prop="pubdate"></el-table-column>
+                <el-table-column  label="操作" >
+                    <template slot-scope="scope">
+                    <el-button class="el-icon-edit" type="primary" circle plain @click="edit(scope.row.id)"></el-button>
+                    <el-button class="el-icon-delete" type="danger" circle plain @click="del(scope.row.id)"></el-button>
+                    </template>
+                </el-table-column>
             </el-table>
             <!-- 分页 -->
             <div>
-                <el-pagination class="cardpage" background layout="prev, pager, next" :total="1000"></el-pagination>
+                <el-pagination
+                    class="cardpage"
+                    background
+                    layout="prev, pager, next"
+                    :total="total"
+                    :page-size="reqParams.per_page"
+                    :current-page="reqParams.page"
+                    @current-change="changePage"
+                    ></el-pagination>
             </div>
         </el-card>
     </div>
@@ -92,17 +107,18 @@ export default {
         status: null,
         channel_id: null,
         // 记录开始和结束时间
-        beginDate: null,
-        endDate: null,
-        Authorization: null
-        // total: ''
+        begin_pubdate: null,
+        end_pubdate: null,
+        Authorization: null,
+        valueDate: ''
       },
       //   默认频道栏目数据
       //   channelOptions: [],
       //   日期选择器默认选中的数据
       dateValues: [],
       // 文章管理列表内容
-      articles: []
+      articles: [],
+      total: 0
     }
   },
   //   组件创建好的时候
@@ -111,6 +127,41 @@ export default {
     this.getArticles()
   },
   methods: {
+    //   分页管理
+    changePage (newPage) {
+      this.reqParams.page = newPage
+      this.getArticles()
+    },
+    //   删除
+    del (id) {
+      this.$confirm('此操作将永久删除该文章, 是否继续?', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        await this.$http.delete('articles/' + id)
+        this.$message.success('删除成功')
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    //   编辑
+    edit (id) {
+      this.$router.push({ path: '/publish', query: { id } })
+    },
+    //   更新时间选择器
+    // 这里的参数必须和后端一样，因为要向后端发送数据，所以要获取到该事件必须参数一样
+    changeDate (values) {
+      this.reqParams.begin_pubdate = values[0]
+      this.reqParams.end_pubdate = values[1]
+    },
+    //   筛选
+    check () {
+      this.getArticles()
+    },
     //   获取频道列表
     // async getChannels () {
     //   // 多个解构赋值 {data :{data :{channel:[id: ,name: ]}}}

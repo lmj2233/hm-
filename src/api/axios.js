@@ -1,11 +1,16 @@
 // 封装axios
 import axios from 'axios'
-
+// 精准处理数据
+import JSONBig from 'json-bigint'
 var instance = axios.create({
-  baseURL: 'http://ttapi.research.itcast.cn/mp/v1_0/'
-//   headers: { Authorization:
-//     'Beaer ' + JSON.parse(window.sessionStorage.getItem('hm73-tt')).token
-//   }
+  baseURL: 'http://ttapi.research.itcast.cn/mp/v1_0/',
+  //   headers: { Authorization:
+  //     'Beaer ' + JSON.parse(window.sessionStorage.getItem('hm73-tt')).token
+  //   }
+  transformResponse: [function (data) {
+  // 对 data 进行任意转换处理
+    return JSONBig.parse(data)
+  }]
 })
 
 // 请求拦截器 设置headers
