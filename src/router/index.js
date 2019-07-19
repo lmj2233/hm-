@@ -7,7 +7,7 @@ import Login from '@/views/login'
 import home from '@/views/home'
 import welcome from '@/views/welcome'
 import NotFound from '@/views/404'
-import article from '@/views/article/index2.vue'
+import article from '@/views/article'
 import image from '@/views/image'
 import publish from '@/views/publish'
 // 注册 VueRouter
