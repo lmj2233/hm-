@@ -10,6 +10,7 @@ import NotFound from '@/views/404'
 import article from '@/views/article'
 import image from '@/views/image'
 import publish from '@/views/publish'
+import comment from '@/views/comment'
 // 注册 VueRouter
 Vue.use(VueRouter)
 
@@ -25,7 +26,8 @@ const router = new VueRouter({
         { path: '/', name: 'welcome', component: welcome },
         { path: '/article', name: 'article', component: article },
         { path: '/image', name: 'image', component: image },
-        { path: '/publish', name: 'publish', component: publish }
+        { path: '/publish', name: 'publish', component: publish },
+        { path: '/comment', name: 'comment', component: comment }
       ]
     },
     { path: '*', name: '404', component: NotFound }
